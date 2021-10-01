@@ -648,7 +648,7 @@ if __name__ == "__main__":
                 sense.show_message(str(elements[3]), text_colour=(255, 0, 0), back_colour=(0, 0, 0))
 
         #print ("Done...")
-        pprint(Kostalquery.KostalRegister)
+        #pprint(Kostalquery.KostalRegister)
         ##########################################
         #print ("----------------------------------")
         time.sleep(3)
