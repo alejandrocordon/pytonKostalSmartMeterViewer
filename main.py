@@ -632,6 +632,12 @@ if __name__ == "__main__":
     sense = sense_hat.SenseHat()
     sense.set_rotation(90)
     sense.low_light = True
+
+    green = (0, 255, 0)
+    red = (255, 0, 0)
+    black = (0, 0, 0)
+    white = (255, 255, 255)
+
     while (True):
         #print ("Starting QUERY .......... ")
         try:
@@ -642,10 +648,18 @@ if __name__ == "__main__":
             print ("Issues querying Kostal Smart Energy Meter -ERROR :", ex)
         for elements in Kostalquery.KostalRegister:
             print ( elements[1], elements[3])
-            if elements[3] <= 0:
-                sense.show_message(str(round(elements[3])), text_colour=(0, 255, 0), back_colour=(0, 0, 0))
+
+
+            value = 64*round(elements[3])/100
+            print(value)
+            if value <= 0:
+                pixels = [green if i < value else white for i in range(64)]
+                sense.set_pixels(pixels)
+                #sense.show_message(str(value), text_colour=(0, 255, 0), back_colour=(0, 0, 0))
             else:
-                sense.show_message(str(round(elements[3])), text_colour=(255, 0, 0), back_colour=(0, 0, 0))
+                pixels = [red if i < value else white for i in range(64)]
+                sense.set_pixels(pixels)
+                #sense.show_message(str(value), text_colour=(255, 0, 0), back_colour=(0, 0, 0))
 
         #print ("Done...")
         #pprint(Kostalquery.KostalRegister)
