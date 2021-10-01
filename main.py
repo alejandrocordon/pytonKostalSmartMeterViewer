@@ -643,9 +643,9 @@ if __name__ == "__main__":
         for elements in Kostalquery.KostalRegister:
             print ( elements[1], elements[3])
             if elements[3] <= 0:
-                sense.show_message(str(elements[3]), text_colour=(0, 255, 0), back_colour=(0, 0, 0))
+                sense.show_message(str(round(elements[3])), text_colour=(0, 255, 0), back_colour=(0, 0, 0))
             else:
-                sense.show_message(str(elements[3]), text_colour=(255, 0, 0), back_colour=(0, 0, 0))
+                sense.show_message(str(round(elements[3])), text_colour=(255, 0, 0), back_colour=(0, 0, 0))
 
         #print ("Done...")
         #pprint(Kostalquery.KostalRegister)
