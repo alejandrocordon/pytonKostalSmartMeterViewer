@@ -41,7 +41,7 @@ from pymodbus.constants import Endian
 from pymodbus.payload import BinaryPayloadDecoder
 from pprint import pprint
 import time
-
+import sense_hat
 
 class kostal_em_query:
     def __init__(self):
@@ -627,7 +627,13 @@ class kostal_em_query:
 #-----------------------------
 
 
+    def init_sense_hat(self):
+        sense = sense_hat.SenseHat()
+        sense.set_rotation(90)
+        sense.low_light = True
+
 if __name__ == "__main__":
+    init_sense_hat()
     while (True):
         #print ("Starting QUERY .......... ")
         try:
@@ -638,10 +644,15 @@ if __name__ == "__main__":
             print ("Issues querying Kostal Smart Energy Meter -ERROR :", ex)
         for elements in Kostalquery.KostalRegister:
             print ( elements[1], elements[3])
+            if elements[3] <= 0:
+                sense.show_message(str(elements[3]), text_colour=(0, 255, 0), back_colour=(0, 0, 0))
+            else:
+                sense.show_message(str(elements[3]), text_colour=(255, 0, 0), back_colour=(0, 0, 0))
+
         #print ("Done...")
         pprint(Kostalquery.KostalRegister)
         ##########################################
         #print ("----------------------------------")
-        time.sleep(1)
+        time.sleep(3)
 
 
