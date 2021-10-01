@@ -40,6 +40,8 @@ from pymodbus.client.sync import ModbusTcpClient
 from pymodbus.constants import Endian
 from pymodbus.payload import BinaryPayloadDecoder
 from pprint import pprint
+import time
+
 
 class kostal_em_query:
     def __init__(self):
@@ -551,6 +553,7 @@ class kostal_em_query:
 
             self.KostalRegister=[]
             self.KostalRegister.append(self.Adr0)
+            '''
             self.KostalRegister.append(self.Adr2)
             self.KostalRegister.append(self.Adr4)
             self.KostalRegister.append(self.Adr6)
@@ -613,7 +616,7 @@ class kostal_em_query:
             self.KostalRegister.append(self.Adr788)
 
             self.KostalRegister.append(self.Adr8192)
-
+            '''
             self.client.close()
 
 
@@ -625,18 +628,20 @@ class kostal_em_query:
 
 
 if __name__ == "__main__":
-    print ("Starting QUERY .......... ")
-    try:
-        Kostalvalues =[]
-        Kostalquery = kostal_em_query()
-        Kostalquery.run()
-    except Exception as ex:
-        print ("Issues querying Kostal Smart Energy Meter -ERROR :", ex)
-    for elements in Kostalquery.KostalRegister:
-        print ( elements[1], elements[3])
-    print ("Done...")
-    pprint(Kostalquery.KostalRegister)
-    ##########################################
-    print ("----------------------------------")
+    while (True):
+        #print ("Starting QUERY .......... ")
+        try:
+            Kostalvalues =[]
+            Kostalquery = kostal_em_query()
+            Kostalquery.run()
+        except Exception as ex:
+            print ("Issues querying Kostal Smart Energy Meter -ERROR :", ex)
+        for elements in Kostalquery.KostalRegister:
+            print ( elements[1], elements[3])
+        #print ("Done...")
+        pprint(Kostalquery.KostalRegister)
+        ##########################################
+        #print ("----------------------------------")
+        time.sleep(1)
 
 
