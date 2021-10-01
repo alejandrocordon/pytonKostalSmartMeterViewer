@@ -627,13 +627,11 @@ class kostal_em_query:
 #-----------------------------
 
 
-    def init_sense_hat(self):
-        sense = sense_hat.SenseHat()
-        sense.set_rotation(90)
-        sense.low_light = True
 
 if __name__ == "__main__":
-    init_sense_hat()
+    sense = sense_hat.SenseHat()
+    sense.set_rotation(90)
+    sense.low_light = True
     while (True):
         #print ("Starting QUERY .......... ")
         try:
