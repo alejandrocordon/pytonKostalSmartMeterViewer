@@ -630,7 +630,7 @@ if __name__ == "__main__":
     black = (0, 0, 0)
     white = (255, 255, 255)
 
-    max_value = 3000 #watios
+    max_value = 1000 #watios
 
     while (True):
         #print ("Starting QUERY .......... ")
@@ -646,8 +646,8 @@ if __name__ == "__main__":
         totalActivePower = round(Kostalquery.KostalRegister[0][3] - Kostalquery.KostalRegister[1][3])
         value = 64 * totalActivePower / max_value
         if totalActivePower > 0:
-            #pixels = [black if i < 64 - value else green for i in range(64)]
-            # sense.set_pixels(pixels)
+            pixels = [black if i < 64 - value else red for i in range(64)]
+
             sense.show_message(str(totalActivePower)+"W", text_colour=(255, 0, 0), back_colour=(0, 0, 0))
             #print ("totalActivePower:", totalActivePower)
             print(bcolors.FAIL + str(totalActivePower)+"W" + bcolors.ENDC)
@@ -655,29 +655,17 @@ if __name__ == "__main__":
             sense.show_message(str(totalActivePower)+"W", text_colour=(255, 204, 0), back_colour=(0, 0, 0))
             print(bcolors.WARNING + str(totalActivePower)+"W" + bcolors.ENDC)
         else:
-            #pixels = [black if i < 64 - value else red for i in range(64)]
-            # sense.set_pixels(pixels)
+            pixels = [black if i < 64 - value else green for i in range(64)]
             sense.show_message(str(totalActivePower)+"W", text_colour=(0, 255, 0), back_colour=(0, 0, 0))
             #print ("totalActivePower:", totalActivePower)
             print(bcolors.OKGREEN + str(totalActivePower)+"W" + bcolors.ENDC)
-
-        for elements in Kostalquery.KostalRegister:
-            print ( elements[1], elements[3])
-            value = 64*round(elements[3])/max_value
-            print(value)
-            if value <= 0:
-                pixels = [black if i < 64-value else green for i in range(64)]
-                #sense.set_pixels(pixels)
-                #sense.show_message(str(value), text_colour=(0, 255, 0), back_colour=(0, 0, 0))
-            else:
-                pixels = [black if i < 64-value else red for i in range(64)]
-                #sense.set_pixels(pixels)
-                #sense.show_message(str(value), text_colour=(255, 0, 0), back_colour=(0, 0, 0))
 
         print (pixels)
         #pprint(Kostalquery.KostalRegister)
         ##########################################
         #print ("----------------------------------")
+        time.sleep(5)
+        sense.set_pixels(pixels)
         time.sleep(3)
 
 
