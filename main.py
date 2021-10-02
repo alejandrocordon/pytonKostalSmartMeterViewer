@@ -653,11 +653,11 @@ if __name__ == "__main__":
             value = 64*round(elements[3])/max_value
             print(value)
             if value <= 0:
-                pixels = [green if i < value else black for i in range(64)]
+                pixels = [black if i < 64-value else green for i in range(64)]
                 sense.set_pixels(pixels)
                 #sense.show_message(str(value), text_colour=(0, 255, 0), back_colour=(0, 0, 0))
             else:
-                pixels = [red if i < value else black for i in range(64)]
+                pixels = [black if i < 64-value else red for i in range(64)]
                 sense.set_pixels(pixels)
                 #sense.show_message(str(value), text_colour=(255, 0, 0), back_colour=(0, 0, 0))
 
