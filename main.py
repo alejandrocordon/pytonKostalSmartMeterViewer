@@ -638,6 +638,8 @@ if __name__ == "__main__":
     black = (0, 0, 0)
     white = (255, 255, 255)
 
+    max_value = 3000 #watios
+
     while (True):
         #print ("Starting QUERY .......... ")
         try:
@@ -648,9 +650,7 @@ if __name__ == "__main__":
             print ("Issues querying Kostal Smart Energy Meter -ERROR :", ex)
         for elements in Kostalquery.KostalRegister:
             print ( elements[1], elements[3])
-
-
-            value = 64*round(elements[3])/100
+            value = 64*round(elements[3])/max_value
             print(value)
             if value <= 0:
                 pixels = [green if i < value else white for i in range(64)]
