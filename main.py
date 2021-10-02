@@ -21,6 +21,18 @@ from pprint import pprint
 import time
 import sense_hat
 
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+
 class kostal_em_query:
     def __init__(self):
         #Change the IP address and port to suite your environment:
@@ -40,6 +52,7 @@ class kostal_em_query:
         self.Adr2.append("U32")
         self.Adr2.append(0)
 
+        '''
         self.Adr4=[]
         self.Adr4=[4]
         self.Adr4.append("Reactive power+")
@@ -387,7 +400,7 @@ class kostal_em_query:
         self.Adr8192.append("ManufacturerID")
         self.Adr8192.append("UInt16")
         self.Adr8192.append(0)
-
+        '''
 
 
     #-----------------------------------------
@@ -467,6 +480,7 @@ class kostal_em_query:
             # LONG List of reads...
             self.Adr0[3]=self.ReadU32(self.Adr0[0])*0.1
             self.Adr2[3]=self.ReadU32(self.Adr2[0])*0.1
+            '''
             self.Adr4[3]=self.ReadU32(self.Adr4[0])*0.1
             self.Adr6[3]=self.ReadU32(self.Adr6[0])*0.1
             self.Adr16[3]=self.ReadU32(self.Adr16[0])*0.1
@@ -527,12 +541,12 @@ class kostal_em_query:
             self.Adr788[3]=self.ReadUInt64(self.Adr788[0])*0.1
 
             self.Adr8192[3]=self.ReadU16_1(self.Adr8192[0])
-
+            '''
 
             self.KostalRegister=[]
             self.KostalRegister.append(self.Adr0)
-            '''
             self.KostalRegister.append(self.Adr2)
+            '''
             self.KostalRegister.append(self.Adr4)
             self.KostalRegister.append(self.Adr6)
             self.KostalRegister.append(self.Adr16)
@@ -626,20 +640,41 @@ if __name__ == "__main__":
             Kostalquery.run()
         except Exception as ex:
             print ("Issues querying Kostal Smart Energy Meter -ERROR :", ex)
+
+        for elements in Kostalquery.KostalRegister:
+            print (elements[1], elements[3])
+        totalActivePower = round(Kostalquery.KostalRegister[0][3] - Kostalquery.KostalRegister[1][3])
+        value = 64 * totalActivePower / max_value
+        if totalActivePower > 0:
+            #pixels = [black if i < 64 - value else green for i in range(64)]
+            # sense.set_pixels(pixels)
+            sense.show_message(str(totalActivePower)+"W", text_colour=(255, 0, 0), back_colour=(0, 0, 0))
+            #print ("totalActivePower:", totalActivePower)
+            print(bcolors.FAIL + str(totalActivePower)+"W" + bcolors.ENDC)
+        elif totalActivePower == 0:
+            sense.show_message(str(totalActivePower)+"W", text_colour=(255, 204, 0), back_colour=(0, 0, 0))
+            print(bcolors.WARNING + str(totalActivePower)+"W" + bcolors.ENDC)
+        else:
+            #pixels = [black if i < 64 - value else red for i in range(64)]
+            # sense.set_pixels(pixels)
+            sense.show_message(str(totalActivePower)+"W", text_colour=(0, 255, 0), back_colour=(0, 0, 0))
+            #print ("totalActivePower:", totalActivePower)
+            print(bcolors.OKGREEN + str(totalActivePower)+"W" + bcolors.ENDC)
+
         for elements in Kostalquery.KostalRegister:
             print ( elements[1], elements[3])
             value = 64*round(elements[3])/max_value
             print(value)
             if value <= 0:
                 pixels = [black if i < 64-value else green for i in range(64)]
-                sense.set_pixels(pixels)
+                #sense.set_pixels(pixels)
                 #sense.show_message(str(value), text_colour=(0, 255, 0), back_colour=(0, 0, 0))
             else:
                 pixels = [black if i < 64-value else red for i in range(64)]
-                sense.set_pixels(pixels)
+                #sense.set_pixels(pixels)
                 #sense.show_message(str(value), text_colour=(255, 0, 0), back_colour=(0, 0, 0))
 
-        #print ("Done...")
+        print (pixels)
         #pprint(Kostalquery.KostalRegister)
         ##########################################
         #print ("----------------------------------")
