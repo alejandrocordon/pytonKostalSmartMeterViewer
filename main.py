@@ -1,28 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#  kostal_em_query - Read only query of the Kostal Smart Energy Meter using TCP/IP modbus protocol
-#  Copyright (C) 2018  Kilian Knoll
-#
-#  This program is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 3 of the License, or
-#  (at your option) any later version.
-#
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-#
-#  Please note that any incorrect or careless usage of this module as well as errors in the implementation can damage your Smart Energy Meter!
-#  Therefore, the author does not provide any guarantee or warranty concerning to correctness, functionality or performance and does not accept any liability for damage caused by this module, examples or mentioned information.
-#  Thus, use it at your own risk!
-#
-#
 #  Purpose:
 #           Query values from Kostal Smart Energy Meter
 #
@@ -32,7 +10,7 @@
 # Requires pymodbus
 # Tested with:
 #
-# Please change the IP address of your Inverter (e.g. 192.168.178.41 and Port (default 1502) to suite your environment - see below)
+# Please change the IP address of your Inverter (e.g. 192.168.1.99 and Port (default 1502) to suite your environment - see below)
 #
 
 import pymodbus
