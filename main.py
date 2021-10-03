@@ -158,9 +158,8 @@ if __name__ == "__main__":
     white = (255, 255, 255)
     yellow = (255, 204, 0)
 
-    max_value_range1 = 1000 #watios
-    max_value_range2 = 2000 #watios
-    max_value_range3 = 3000 #watios
+    max_value = 3000 #watios
+
 
 
     while (True):
@@ -174,37 +173,23 @@ if __name__ == "__main__":
         for elements in Kostalquery.KostalRegister:
             print (elements[1], elements[3])
         totalActivePower = round(Kostalquery.KostalRegister[0][3] - Kostalquery.KostalRegister[1][3])
-        pixels_value_range1 = 48 * totalActivePower / max_value_range1
-        pixels_value_range2 = 16 * totalActivePower / max_value_range2
-        pixels_value_range3 = 8 * totalActivePower / max_value_range3
-
+        pixels_value = 64 * totalActivePower / max_value
 
         if totalActivePower > 0:
-            pixels_range1 = [black if i < 48 - pixels_value_range1 else red for i in range(48)]
-            pixels_range2 = [black if i < 56 - pixels_value_range2 else red for i in range(56,49)]
-            pixels_range3 = [black if i < 8 - pixels_value_range3 else red for i in range(50,64)]
-
-
+            pixels = [black if i < 64 - pixels_value else red for i in range(64)]
             sense.show_message(str(totalActivePower)+"W", text_colour=(255, 0, 0), back_colour=(0, 0, 0))
             print(bcolors.FAIL + str(totalActivePower)+"W" + bcolors.ENDC)
         elif totalActivePower == 0:
-            sense.show_message(str(totalActivePower)+"W", text_colour=(255, 204, 0), back_colour=(0, 0, 0))
             pixels = [black for i in range(64)]
+            sense.show_message(str(totalActivePower)+"W", text_colour=(255, 204, 0), back_colour=(0, 0, 0))
             print(bcolors.WARNING + str(totalActivePower)+"W" + bcolors.ENDC)
         else:
-            #pixels = [black if i < 64 - value else green for i in range(64)]
-
-            pixels_range1 = [black if i < 48 - pixels_value_range1 else green for i in range(48)]
-            pixels_range2 = [black if i < 56 - pixels_value_range2 else green for i in range(56, 49)]
-            pixels_range3 = [black if i < 8 - pixels_value_range3 else green for i in range(50, 64)]
-
+            pixels = [black if i < 64 - pixels_value else green for i in range(64)]
             sense.show_message(str(totalActivePower)+"W", text_colour=(0, 255, 0), back_colour=(0, 0, 0))
             print(bcolors.OKGREEN + str(totalActivePower)+"W" + bcolors.ENDC)
 
-
-
-        pixels = [pixels_range1, pixels_range2, pixels_range3]
         time.sleep(0.5)
+        pprint(pixels)
         sense.set_pixels(pixels)
         time.sleep(5)
 
