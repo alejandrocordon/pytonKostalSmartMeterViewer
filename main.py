@@ -176,7 +176,7 @@ if __name__ == "__main__":
         pixels_value = 64 * totalActivePower / max_value
 
         if totalActivePower > 0:
-            pixels = [black if i < 64 - pixels_value else red for i in range(64)]
+            pixels = [black if i < 64 - abs(pixels_value) else red for i in range(64)]
             sense.show_message(str(totalActivePower)+"W", text_colour=(255, 0, 0), back_colour=(0, 0, 0))
             print(bcolors.FAIL + str(totalActivePower)+"W" + bcolors.ENDC)
         elif totalActivePower == 0:
@@ -184,8 +184,8 @@ if __name__ == "__main__":
             sense.show_message(str(totalActivePower)+"W", text_colour=(255, 204, 0), back_colour=(0, 0, 0))
             print(bcolors.WARNING + str(totalActivePower)+"W" + bcolors.ENDC)
         else:
-            pixels = [black if i < 64 - pixels_value else green for i in range(64)]
-            sense.show_message(str(totalActivePower)+"W", text_colour=(0, 255, 0), back_colour=(0, 0, 0))
+            pixels = [black if i < 64 - abs(pixels_value) else green for i in range(64)]
+            sense.show_message(str(abs(totalActivePower))+"W", text_colour=(0, 255, 0), back_colour=(0, 0, 0))
             print(bcolors.OKGREEN + str(totalActivePower)+"W" + bcolors.ENDC)
 
         time.sleep(0.5)
