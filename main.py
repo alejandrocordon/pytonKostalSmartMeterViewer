@@ -189,7 +189,7 @@ if __name__ == "__main__":
             print(bcolors.OKGREEN + str(totalActivePower)+"W" + bcolors.ENDC)
 
         time.sleep(0.5)
-        pprint(pixels)
+        #pprint(pixels)
         sense.set_pixels(pixels)
         time.sleep(5)
 
