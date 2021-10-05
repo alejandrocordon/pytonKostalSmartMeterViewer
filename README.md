@@ -26,4 +26,7 @@ pip3 install pymodbus
 python3 main.py
 
 ![Game Process](https://github.com/sodapop/pytonKostalSmartMeterViewer-/blob/master/funcionamiento.gif)
-![Kostal Smart Metter](https://github.com/sodapop/pytonKostalSmartMeterViewer-/blob/master/vatimetro.jpg.jpg)
+
+This is a picture of the Kostal smart metter.
+
+![Kostal Smart Metter](https://github.com/sodapop/pytonKostalSmartMeterViewer-/blob/master/vatimetro.jpg)
