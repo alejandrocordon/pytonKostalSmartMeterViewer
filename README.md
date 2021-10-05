@@ -25,4 +25,4 @@ pip3 install
 ![BTC Sense Hat](IMG_1335.jpg)
 ![BTC Sense Hat](IMG_1343.jpg)
 
-![Game Process](https://github.com/Faizun-Faria/Thief-Robber-Landlord-Police/blob/main/Preview/gif_english.gif)
+![Game Process](funconamiento.gif)
