@@ -25,4 +25,4 @@ pip3 install
 ![BTC Sense Hat](IMG_1335.jpg)
 ![BTC Sense Hat](IMG_1343.jpg)
 
-![Game Process](funconamiento.gif)
+![Game Process](https://github.com/sodapop/pytonKostalSmartMeterViewer-/blob/master/funcionamiento.gif)
