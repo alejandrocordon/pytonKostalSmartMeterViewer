@@ -160,7 +160,20 @@ if __name__ == "__main__":
 
     max_value = 3000 #watios
 
+    X = [255, 0, 0]  # Red
+    O = [0, 0, 0]  # Black
+    G = [255, 215, 0]  # Gold
 
+    question_mark = [
+        O, O, O, X, X, O, O, O,
+        O, O, X, O, O, X, O, O,
+        O, O, O, O, O, X, O, O,
+        O, O, O, O, X, O, O, O,
+        O, O, O, X, O, O, O, O,
+        O, O, O, X, O, O, O, O,
+        O, O, O, O, O, O, O, O,
+        O, O, O, X, O, O, O, O
+    ]
 
     while (True):
         try:
@@ -169,9 +182,10 @@ if __name__ == "__main__":
             Kostalquery.run()
         except Exception as ex:
             print ("Issues querying Kostal Smart Energy Meter -ERROR :", ex)
+            sense.set_pixels(question_mark)
 
         for elements in Kostalquery.KostalRegister:
-            print (elements[1], elements[3])
+            #print (elements[1], elements[3])
         totalActivePower = round(Kostalquery.KostalRegister[0][3] - Kostalquery.KostalRegister[1][3])
         pixels_value = 64 * totalActivePower / max_value
 
