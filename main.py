@@ -184,27 +184,33 @@ if __name__ == "__main__":
             print ("Issues querying Kostal Smart Energy Meter -ERROR :", ex)
             sense.set_pixels(question_mark)
 
-        for elements in Kostalquery.KostalRegister:
-            #print (elements[1], elements[3])
-        totalActivePower = round(Kostalquery.KostalRegister[0][3] - Kostalquery.KostalRegister[1][3])
-        pixels_value = 64 * totalActivePower / max_value
+        try:
+            for elements in Kostalquery.KostalRegister:
+            # print (elements[1], elements[3])
+            totalActivePower = round(Kostalquery.KostalRegister[0][3] - Kostalquery.KostalRegister[1][3])
+            pixels_value = 64 * totalActivePower / max_value
 
-        if totalActivePower > 0:
-            pixels = [black if i < 64 - abs(pixels_value) else red for i in range(64)]
-            sense.show_message(str(totalActivePower)+"W", text_colour=(255, 0, 0), back_colour=(0, 0, 0))
-            print(bcolors.FAIL + str(totalActivePower)+"W" + bcolors.ENDC)
-        elif totalActivePower == 0:
-            pixels = [black for i in range(64)]
-            sense.show_message(str(totalActivePower)+"W", text_colour=(255, 204, 0), back_colour=(0, 0, 0))
-            print(bcolors.WARNING + str(totalActivePower)+"W" + bcolors.ENDC)
-        else:
-            pixels = [black if i < 64 - abs(pixels_value) else green for i in range(64)]
-            sense.show_message(str(abs(totalActivePower))+"W", text_colour=(0, 255, 0), back_colour=(0, 0, 0))
-            print(bcolors.OKGREEN + str(totalActivePower)+"W" + bcolors.ENDC)
+            if totalActivePower > 0:
+                pixels = [black if i < 64 - abs(pixels_value) else red for i in range(64)]
+                sense.show_message(str(totalActivePower) + "W", text_colour=(255, 0, 0), back_colour=(0, 0, 0))
+                print(bcolors.FAIL + str(totalActivePower) + "W" + bcolors.ENDC)
+            elif totalActivePower == 0:
+                pixels = [black for i in range(64)]
+                sense.show_message(str(totalActivePower) + "W", text_colour=(255, 204, 0), back_colour=(0, 0, 0))
+                print(bcolors.WARNING + str(totalActivePower) + "W" + bcolors.ENDC)
+            else:
+                pixels = [black if i < 64 - abs(pixels_value) else green for i in range(64)]
+                sense.show_message(str(abs(totalActivePower)) + "W", text_colour=(0, 255, 0), back_colour=(0, 0, 0))
+                print(bcolors.OKGREEN + str(totalActivePower) + "W" + bcolors.ENDC)
 
-        time.sleep(0.5)
-        #pprint(pixels)
-        sense.set_pixels(pixels)
-        time.sleep(5)
+            time.sleep(0.5)
+            # pprint(pixels)
+            sense.set_pixels(pixels)
+            time.sleep(5)
+        except Exception as ex:
+            print("Issues querying Kostal Smart Energy Meter -ERROR :", ex)
+            sense.set_pixels(question_mark)
+
+
 
 
