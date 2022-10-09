@@ -1,6 +1,6 @@
 # pytonKostalSmartMeterViewer
 
-If you have a Kostal Smart Metter you can have a ticket to check the Power origin and the quantity of ha Kostal Smart meter.
+If you have a *Kostal Smart Metter* you can have a ticket to check the Power origin and the quantity of ha Kostal Smart meter.
 Normally this is used when you have a solar power supply and the energy net power supply. 
 
 If the installation is using the energy net power supply it will be shown as color red and an amount of points from 0 to max_power value.
